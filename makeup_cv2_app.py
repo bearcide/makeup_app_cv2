@@ -518,21 +518,20 @@ class CamApp(App):
 
 
 
-                            #cv2.fillPoly(img_copy, [points], (float(r_input),float(g_input),float(b_input)))
-                        #integration of the makeup to the normal camarar
+                        #integration of the makeup to the normal camara
                         makeup_treated = cv2.addWeighted(frame, 1.0, img_copy, float(a_input), 0.0)
                         buf1 = cv2.flip(makeup_treated, 0)
 
                         global save
                         if save == True:
                             global name_save
-                            with open("//home//egr//Desktop//cs_ia//makeup_saved.csv", "a") as doc:
+                            with open("/home/bearcide/Desktop/code/makeup_cv2_app/makeup_saved.csv", "a") as doc:
                                 writer = csv.writer(doc)
                                 writer.writerow(["Name: " + str(name_save), " Type: " + type_save, " r: " + r_input, " g: " + g_input, " b: " + b_input, " a: " + a_input])
                                 save = False
                         global wipe
                         if wipe == True:
-                            with open("//home//egr//Desktop//cs_ia//makeup_saved.csv", "w") as doc:
+                            with open("/home/bearcide/Desktop/code/makeup_cv2_app/makeup_saved.csv", "w") as doc:
                                 doc.truncate
                                 doc.close
                                 wipe = False
@@ -541,7 +540,6 @@ class CamApp(App):
                 buf1 = cv2.flip(frame, 0)
             buf = buf1.tostring()
             texture1 = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='bgr') 
-            #if working on RASPBERRY PI, use colorfmt='rgba' here instead, but stick with "bgr" in blit_buffer. 
             texture1.blit_buffer(buf, colorfmt='bgr', bufferfmt='ubyte')
             # display image from the texture
             self.img1.texture = texture1
